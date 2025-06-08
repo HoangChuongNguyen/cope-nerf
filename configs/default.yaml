@@ -1,0 +1,159 @@
+
+dataloading:
+  dataset_name: any
+  path: 
+  scene: []
+  batchsize: 1
+  n_workers: 1
+  with_mask: False
+  spherify: True
+  resize_factor: 
+  crop_size: 0
+  random_ref_interval: [1,2,3]
+  load_colmap_poses: True
+  load_gt_depth: True
+  shuffle: True
+  sample_rate: 8
+  # My parameter 
+  load_flow: False
+rendering:
+  num_points: 128
+  depth_range: [0.01, 10.0]
+training:
+  original_resolution: [540, 960]
+  resolution: [540, 960]
+  load_dir: model.pt
+  load_pose_dir: model_pose.pt
+  load_focal_dir: model_focal.pt
+  load_distortion_dir: model_distortion.pt
+  scheduling_epoch: 5000
+  batch_size: 1
+  learning_rate: 0.001 # default 0.001
+  pose_learning_rate: 0.0005 # default 0.001
+  weight_decay: 0.0
+  scheduler_gamma: 0.9954
+  motion_scheduler_gamma: 0.0954
+  # visualize_every: 1000
+  eval_pose_every: 100 # epoch
+  print_every: 1000
+  checkpoint_every: 100
+  rgb_weight: [1.0, 1.0]
+  eikonal_weight: [0.1, 0.1]
+  flow_rgb_weight: [7.5,7.5]
+  sdf_weight: [0.1, 0.1]
+  edge_aware_smoothness_weight: [1.0, 0.0]
+  smoothness_weight: [0.0001, 0.000]
+  sdf_consistency_weight: [0.0, 1.0]
+  vis_resolution: [135, 240]
+  mode: train
+  load_ckpt_model_only: False 
+  scheduling_start: 3001
+  seed: 678
+  pretrained_sdf_path: 'pretrained_sdf/model.pt'
+  nb_warm_up_it : 5000
+  nb_sample_timestep: 10
+  # Parameters for loss weight annealing
+  end_sdf_weight_increase_iteration : 100000
+  end_consistency_weight_increase_iteration: 100000
+  end_smooth_epoch: 201
+  # start_eikonal_weight_increase_iteration: 10000
+  # end_eikonal_weight_increase_iteration: 100000
+  # Whether to detach the camera pose in sdf_consistency loss
+  sdf_consistency_enable_pose_grad:  False
+  # Parameter to learn depth bound
+  # if it >= depth_bound_scheduler_milestones[m]: 
+    # update depth bound every depth_bound_update_every_milestones[m] iterations
+    # the lr rate for each update is depth_bound_lr[m]
+  depth_bound_scheduler_milestones: [0, 100000, 200000]
+  depth_bound_update_every_milestones: [10000, 10000, 10000]
+  depth_bound_lr: [0.0, 0.0, 0.0]
+  # Parameter for sampling within a window
+  patch_size: 4
+  n_training_points: 1024
+  # Multiple GPU training
+  gpu_ids: [0]
+  # Query in the world coordinate
+  world_idx: 'mid'
+  start_query_world_epoch: 2001
+  freeze_camera_pose_period: 100000000000000
+  # Progressively increase the scale => Coarse-to-fine
+  # To deactivate this, set coarse_to_fine_scheduler: {}
+  coarse_to_fine_scheduler: {}
+  # Parameters to refine the camera poses 
+  do_refine_pose: True
+  refine_from_scratch: True
+  pose_refine_lr: 0.001
+  pose_refine_epochs: 2000
+  # Lr drop stage 1
+  lr_drop_half_epoch: [] 
+eval:
+  eval_pose_lr: 0.00025
+  eval_pose_epoch: 300
+  eval_pose_scheduler_gamma: 0.5
+
+extract_images:
+  extraction_dir: extraction
+  resolution:
+  model_file: model.pt
+  model_file_pose: model_pose.pt
+  eval_image: True
+  eval_depth: True
+  generate_mesh: True
+
+neus_nerf:
+    D : 8
+    d_in : 4
+    d_in_view : 3
+    W : 256
+    multires : 10
+    multires_view : 4
+    output_ch : 4
+    skips : [4]
+    use_viewdirs : True
+motion_network:
+    d_out : 6 # 3 angular velocity + 3 velocity
+    d_in : 1 # 1 for timestep
+    d_hidden : 256
+    n_layers : 4
+    skip_in : [2]
+    multires : 6
+    bias : 0.5
+    scale : 1.0
+    geometric_init : False
+    weight_norm : True
+neus_sdf_network:
+    d_out : 257
+    d_in : 4 # 3 for points cloud + 1 for timestep
+    d_hidden : 256
+    n_layers : 8
+    skip_in : [4]
+    multires : 6
+    bias : 0.5
+    scale : 1.0
+    geometric_init : True
+    weight_norm : True
+neus_variance_network:
+    init_val : 0.3
+neus_rendering_network:
+    d_feature : 256
+    mode : idr
+    d_in : 11 # 3 for points cloud + 3 normal + 3 direction + 1 timestep + 1 sdf flow
+    d_out : 3
+    d_hidden : 256
+    n_layers : 4
+    weight_norm : True
+    multires_view : 4
+    squeeze_out : True
+    use_negative_ray_vector : False
+neus_renderer:
+    n_samples : 64
+    n_importance : 64
+    n_outside : 0
+    up_sample_steps : 4     # 1 for simple coarse-to-fine sampling
+    perturb : 1.0
+    n_max_network_queries: 64000
+    importance_sampling_start: 0
+    naive_render: False
+neus_training:
+  neus_anneal_end : 50000 # Add this following NeuS
+
