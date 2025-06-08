@@ -5,7 +5,7 @@ from math import exp
 from torch.autograd import Variable
 import torch.nn.functional as F
 
-# We use the same evaluation metrics as CF3DGS.
+# We use the same evaluation metrics as CF3DGS to evaluate.
 # The functions in this file are copied from https://github.com/NVlabs/CF-3DGS. 
 
 def mse(img1, img2):
