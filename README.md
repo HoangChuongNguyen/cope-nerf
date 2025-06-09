@@ -46,7 +46,7 @@ To evaluate the method in all tasks (novel-view synthesis, depth estimation and 
 python eval.py configs/Co3D/skateboard.yaml
 ```
 
-The latest check point will be automatically loaded. If ground-depth is not available in the dataset, depth evaluation will be skipped. 
+The latest check point will be automatically loaded. If ground-truth depth is not available in the dataset, depth evaluation will be skipped. 
 
 
 ## Citation
