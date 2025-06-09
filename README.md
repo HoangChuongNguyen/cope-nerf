@@ -1,6 +1,6 @@
 # [CVPR2025] Joint Optimization of Neural Radiance Fields and Continuous Camera Motion from a Monocular Video
 
-**[Project Page]() | [Paper](https://openaccess.thecvf.com/content/CVPR2025/papers/Nguyen_Joint_Optimization_of_Neural_Radiance_Fields_and_Continuous_Camera_Motion_CVPR_2025_paper.pdf) | [Data]() | [Pretrained Model]()**
+**[Project Page](https://hoangchuongnguyen.github.io/cope-nerf/index.html) | [Paper](https://openaccess.thecvf.com/content/CVPR2025/papers/Nguyen_Joint_Optimization_of_Neural_Radiance_Fields_and_Continuous_Camera_Motion_CVPR_2025_paper.pdf) | [Data](https://drive.google.com/drive/folders/1TQ5R73OuYvogKXZnbyCTcyE_MMH57_WJ?usp=sharing) | [Pretrained Model]()**
 
 
 Hoang Chuong Nguyen<sup>1</sup>, Wei Mao, Jose M. Alvarez<sup>2</sup>, Miaomiao Liu<sup>1</sup>.
