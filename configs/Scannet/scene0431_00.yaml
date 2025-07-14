@@ -1,22 +1,22 @@
 dataloading:
-  path: data/Co3D
-  scene: ['skateboard']
+  path: data/Scannet
+  scene: ['scene0431_00']
   random_ref_interval: [1,2,3]
 training:
-  # Path , 
-  out_dir:  out/Co3D/skateboard
-  load_dir:  out/Co3D/skateboard/models/weights/model.pt
+  # Path
+  out_dir:  out/Scannet/scene0431_00
+  load_dir:  out/Scannet/scene0431_00/models/weights/model.pt
   # Resolution
-  original_resolution: [717, 1275]
-  resolution: [717, 1275]
-  vis_resolution: [89, 158]
+  original_resolution: [484, 648]
+  resolution: [484, 648]
+  vis_resolution: [121, 162]
   # Loss weight
   eikonal_weight: [0.1, 0.1]
   sdf_weight: [0.1, 0.1]
   flow_rgb_weight: [7.5,7.5]
-  rgb_weight: [0.33333, 0.33333]
+  rgb_weight: [0.333, 0.333]
   edge_aware_smoothness_weight: [1.0, 0.0]
-  smoothness_weight: [0.0001, 0.000]
+  smoothness_weight: [0.0001, 0.0]
   sdf_consistency_weight: [0.0, 1.0]
   # Sampling points
   patch_size: 4
@@ -27,21 +27,20 @@ training:
   sdf_consistency_enable_pose_grad: True
   end_smooth_epoch: 5001
   # Coarse-to-fine training
-  coarse_to_fine_scheduler: {8: [0,201], 2: [200,401], 1: [401, 100000000000]} # dict of {scale: epoch_interval}
+  coarse_to_fine_scheduler: {}
   # Stage 2 parameter
-  start_query_world_epoch: 5001
+  start_query_world_epoch: 2001
   freeze_camera_pose_period: 100000000000000
   # Lr scheduler
   scheduling_epoch: 10000
-  scheduling_start: 6001
+  scheduling_start: 3001
   # Others
   seed: 678
   gpu_ids: [0]
-  # Case specific
 extract_images:
-  resolution: [717, 1275]
+  resolution: [484, 648]
 rendering:
   depth_range: [0.01, 5.0]
 neus_variance_network:
-  init_val: 0.3
+  init_val: 0.2
 

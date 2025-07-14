@@ -226,9 +226,8 @@ class Evaluator(Trainer):
         # depth_max = torch.quantile(torch.stack(gt_depth_list), 0.90)
         for i in tqdm(range(len(pred_depth_list))):
             gt_depth = torch.clone(torch.tensor(gt_depth_list)[i]).detach().cpu().numpy()
-            if cfg['dataloading']['crop_size'] != 0:
-                if scene == 'scene0079_00':
-                    gt_depth = gt_depth[6:-6, 8:-8]
+            if cfg['dataloading']['crop_size'] != 0: # Crop the gt depth of scene0079_00 in Scannet dataset
+                gt_depth = gt_depth[6:-6, 8:-8]
             # gt_depth[:(gt_depth.shape[0]//4)] = max_depth + 1
             pred_depth = torch.clone(pred_depth_list[i]).detach().cpu().numpy()
             pred_depth = cv2.resize(pred_depth, (gt_depth.shape[1], gt_depth.shape[0]), interpolation=cv2.INTER_NEAREST)

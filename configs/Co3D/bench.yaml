@@ -1,14 +1,14 @@
 dataloading:
   path: data/Co3D
-  scene: ['skateboard']
+  scene: ['bench']
   random_ref_interval: [1,2,3]
 training:
   # Path , 
-  out_dir:  out/Co3D/skateboard
-  load_dir:  out/Co3D/skateboard/models/weights/model.pt
+  out_dir:  out/Co3D/bench
+  load_dir:  out/Co3D/bench/models/weights/model.pt
   # Resolution
-  original_resolution: [717, 1275]
-  resolution: [717, 1275]
+  original_resolution: [712, 1266]
+  resolution: [712, 1266]
   vis_resolution: [89, 158]
   # Loss weight
   eikonal_weight: [0.1, 0.1]
@@ -25,7 +25,7 @@ training:
   end_sdf_weight_increase_iteration: -1
   end_consistency_weight_increase_iteration: 100000
   sdf_consistency_enable_pose_grad: True
-  end_smooth_epoch: 5001
+  end_smooth_epoch: 201
   # Coarse-to-fine training
   coarse_to_fine_scheduler: {8: [0,201], 2: [200,401], 1: [401, 100000000000]} # dict of {scale: epoch_interval}
   # Stage 2 parameter
@@ -39,7 +39,7 @@ training:
   gpu_ids: [0]
   # Case specific
 extract_images:
-  resolution: [717, 1275]
+  resolution: [712, 1266]
 rendering:
   depth_range: [0.01, 5.0]
 neus_variance_network:

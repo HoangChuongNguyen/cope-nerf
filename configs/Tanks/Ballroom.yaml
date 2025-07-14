@@ -1,0 +1,44 @@
+dataloading:
+  path: data/Tanks
+  scene: ['Ballroom']
+  random_ref_interval: [1,5,10]
+training:
+  # Path
+  out_dir:  out/Tanks/Ballroom
+  load_dir:  out/Tanks/Ballroom/models/weights/model.pt
+  # Resolution
+  resolution: [540, 960]
+  vis_resolution: [135, 240]
+  # Loss weight
+  eikonal_weight: [0.1, 0.1]
+  sdf_weight: [0.1, 0.1]
+  flow_rgb_weight: [5.0, 5.0]
+  rgb_weight: [1.0, 1.0]
+  edge_aware_smoothness_weight: [1.0, 1.0]
+  smoothness_weight: [0.0001, 0.0001]
+  sdf_consistency_weight: [0.0, 1.0]
+  # Sampling points
+  patch_size: 4
+  n_training_points: 1024
+  # Loss annealing
+  end_sdf_weight_increase_iteration: -1
+  end_consistency_weight_increase_iteration: 100000
+  sdf_consistency_enable_pose_grad: True
+  # Coarse-to-fine training
+  coarse_to_fine_scheduler: {}
+  # Stage 2 parameter
+  start_query_world_epoch: 4001
+  freeze_camera_pose_period: 100000000000000
+  # Lr scheduler
+  scheduling_epoch: 10000
+  scheduling_start: 5001
+  # Others
+  seed: 678
+  gpu_ids: [0]
+extract_images:
+  resolution: [540, 960]
+rendering:
+  depth_range: [0.01, 10.0]
+neus_variance_network:
+  init_val: 0.2
+
